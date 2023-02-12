@@ -1,0 +1,23 @@
+all:
+  hosts:
+    app-one:
+      ansible_host: 192.168.60.4
+    app-two:
+      ansible_host: 192.168.60.5
+    db:
+      ansible_host: 192.168.60.6
+  children:
+    apps:
+      hosts:
+        app-one:
+        app-two:
+    dbs:
+      hosts:
+        db:
+    multi:
+      children:
+        apps:
+        dbs:
+      vars:
+        ansible_user: vagrant
+        ansible_ssh_private_key_file: ~/.vagrant.d/insecure_private_key  

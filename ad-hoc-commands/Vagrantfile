@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version.
+Vagrant.configure("2") do |config|
+  # Common VM configuration.
+  config.vm.box = "bento/ubuntu-22.04"
+  config.ssh.insert_key = false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = 1024
+    vb.linked_clone = true
+  end
+
+  # Application servers config.
+  config.vm.define "app-one" do |app|
+    app.vm.hostname = "app-one"
+    app.vm.network :private_network, ip: "192.168.60.4"
+  end
+
+  config.vm.define "app-two" do |app|
+    app.vm.hostname = "app-two"
+    app.vm.network :private_network, ip: "192.168.60.5"
+  end
+
+  # Database server config.
+  config.vm.define "db" do |db|
+    db.vm.hostname = "db"
+    db.vm.network :private_network, ip: "192.168.60.6"
+  end
+end
