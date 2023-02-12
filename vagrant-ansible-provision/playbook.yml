@@ -1,0 +1,15 @@
+- name: Provision vagrant box
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure chrony (for time synchronization) is installed.
+      ansible.builtin.package:
+        name: chrony
+        state: present
+
+    - name: Ensure chrony is running.
+      ansible.builtin.service:
+        name: chronyd
+        state: started
+        enabled: true

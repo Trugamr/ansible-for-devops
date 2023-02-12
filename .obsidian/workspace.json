@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "vagrant-ansible-provision/notes.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "vagrant-ansible-provision/notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "vagrant-ansible-provision/notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "vagrant-ansible-provision/notes.md"
               }
             }
           }
@@ -138,6 +138,8 @@
   },
   "active": "6b34c7947fa2d485",
   "lastOpenFiles": [
-    "basic/notes.md"
+    "basic/notes.md",
+    "vagrant-ansible-provision/notes.md",
+    "README.md"
   ]
 }
