@@ -1,3 +1,4 @@
+---
 - name: Provision vagrant box
   hosts: all
   become: true
