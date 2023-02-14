@@ -1,0 +1,72 @@
+---
+- name: Deploy drupal application
+  hosts: all
+  become: true
+  vars_files:
+    - variables.yml
+
+  pre_tasks:
+    - name: Update repo cache if needed
+      ansible.builtin.package:
+        update_cache: true
+        cache_valid_time: 3600
+
+  handlers:
+    - name: Restart Apache
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+
+  tasks:
+    - name: Get packages to manage apt apt_repository
+      ansible.builtin.package:
+        name:
+          - python3-apt
+          - python3-pycurl
+        state: present
+
+    - name: Add ondrej repo for later PHP versions
+      ansible.builtin.apt_repository:
+        repo: ppa:ondrej/php
+        update_cache: true
+
+    - name: Install Apache, MySQL, PHP and other dependencies
+      ansible.builtin.package:
+        name:
+          - acl
+          - git
+          - curl
+          - unzip
+          - sendmail
+          - apache2
+          - php7.4-common
+          - php7.4-cli
+          - php7.4-dev
+          - php7.4-gd
+          - php7.4-curl
+          - php7.4-json
+          - php7.4-opcache
+          - php7.4-xml
+          - php7.4-mbstring
+          - php7.4-pdo
+          - php7.4-mysql
+          - php-apcu
+          - libpcre3-dev
+          - libapache2-mod-php7.4
+          - python3-mysqldb
+          - mysql-server
+        state: present
+
+    - name: Disable firewall (since this is for dev only)
+      ansible.builtin.service:
+        name: ufw
+        state: stopped
+
+    - name: Start Apache, MySQL and PHP
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      with_items:
+        - apache2
+        - mysql
