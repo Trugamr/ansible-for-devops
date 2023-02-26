@@ -1,0 +1,11 @@
+---
+- name: Testing secret encrpytion
+  hosts: localhost
+  connection: local
+  # Hint; Password is not 1234
+  vars_files: variables.yml
+
+  tasks:
+    - name: Print saved secret message
+      ansible.builtin.debug:
+        msg: "Just be {{ secret_message }}"
