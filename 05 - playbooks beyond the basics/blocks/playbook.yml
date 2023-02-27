@@ -1,0 +1,27 @@
+---
+- name: Testing ansible blocks
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - name: Setup nginx
+      become: true
+      block:
+        - name: Install nginx package
+          ansible.builtin.package:
+            name: nginx
+            state: present
+
+        - name: Ensure nginx service is started and enabled
+          ansible.builtin.service:
+            name: nginx
+            state: started
+            enabled: true
+      rescue:
+        - name: This witll run when block task fails
+          ansible.builtin.debug:
+            msg: Nginx setup failed
+      always:
+        - name: This will always run
+          ansible.builtin.debug:
+            msg: Nginx block ran
